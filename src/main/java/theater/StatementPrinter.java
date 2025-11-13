@@ -34,11 +34,7 @@ public class StatementPrinter {
                     getPlay(performance).getName(),
                     formatter.format(getAmount(performance) / Constants.PERCENT_FACTOR),
                     performance.getAudience()));
-            volumeCredits += Math.max(
-                    performance.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
-            if ("comedy".equals(getPlay(performance).getType())) {
-                volumeCredits += performance.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
-            }
+            volumeCredits += getVolumeCredits(performance);
             totalAmount += getAmount(performance);
         }
         result.append(String.format("Amount owed is %s%n",
@@ -73,6 +69,15 @@ public class StatementPrinter {
             default:
                 throw new RuntimeException(String.format("unknown type: %s",
                         getPlay(performance).getType()));
+        }
+        return result;
+    }
+
+    private int getVolumeCredits(Performance performance) {
+        int result = Math.max(
+                performance.getAudience() - Constants.BASE_VOLUME_CREDIT_THRESHOLD, 0);
+        if ("comedy".equals(getPlay(performance).getType())) {
+            result += performance.getAudience() / Constants.COMEDY_EXTRA_VOLUME_FACTOR;
         }
         return result;
     }
