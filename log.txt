@@ -1,2 +1,4 @@
-22a23c1 (HEAD -> main, origin/main, origin/HEAD) Task 1.1
+abbcecc Task 2.1
+f1ad411 Task 1.2
+22a23c1 Task 1.1
 2153073 Initial commit
